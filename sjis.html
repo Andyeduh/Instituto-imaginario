@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SJIS – Secretaria de Juventude e Impacto Social</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --roxo: #5B2E8A;
+      --dourado: #d4af37;
+      --amarelo: #FFD24A;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #fff;
+      z-index: 10000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    header img { height: 48px; }
+    .menu-icon { font-size: 1.9rem; color: var(--roxo); border: none; background: none; cursor: pointer; }
+
+    /* MENU */
+    #navMenu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 420px;
+      height: 100vh;
+      background: rgba(91,46,138,0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 64px;
+      gap: 18px;
+      transition: right .3s ease;
+      z-index: 9999;
+    }
+    #navMenu.active { right: 0; }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: 0.2s;
+    }
+    .nav-link:hover { color: var(--amarelo); }
+    .close-btn { position: absolute; top: 18px; right: 18px; font-size: 1.8rem; background: none; border: none; color: #fff; cursor: pointer; }
+    #navOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+      z-index: 9998;
+    }
+    #navOverlay.visible { opacity: 1; pointer-events: auto; }
+
+    /* BANNER */
+    .banner {
+      height: 60vh;
+      background: linear-gradient(135deg, var(--roxo), var(--dourado));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner h1 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    .banner p {
+      font-size: 1.1rem;
+      max-width: 700px;
+    }
+    .banner::after {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+    }
+
+    /* CONTEÚDO */
+    section {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      color: var(--roxo);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #faf7ff;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform .3s;
+    }
+    .card:hover { transform: translateY(-6px); }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--amarelo), var(--dourado));
+      border-radius: 8px;
+      color: #4a2c6d;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      background: var(--roxo);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html"><img src="https://files.catbox.moe/l556xu.png" alt="Instituto Imaginário"></a>
+    <button class="menu-icon" id="menuBtn">☰</button>
+
+    <nav id="navMenu">
+      <button class="close-btn" id="closeBtn">✖</button>
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="sobre.html" class="nav-link">Sobre</a>
+      <a href="projetos.html" class="nav-link">Projetos</a>
+      <a href="casos.html" class="nav-link">Casos</a>
+      <a href="sjis.html" class="nav-link">SJIS – Secretaria de Juventude e Impacto Social</a>
+      <a href="contato.html" class="nav-link">Contato</a>
+    </nav>
+  </header>
+
+  <div id="navOverlay"></div>
+  <div style="height:76px;"></div>
+
+  <section class="banner">
+    <h1>Secretaria de Juventude e Impacto Social</h1>
+    <p>Um espaço dedicado à transformação, protagonismo jovem e projetos que geram impacto positivo na sociedade.</p>
+  </section>
+
+  <section>
+    <h2>Sobre a SJIS 💜</h2>
+    <p style="text-align:center;max-width:800px;margin:0 auto;">
+      A SJIS é uma iniciativa do Instituto Imaginário voltada ao fortalecimento da juventude,
+      incentivando projetos criativos, sociais e educacionais que inspiram mudança e inovação.
+    </p>
+  </section>
+
+  <section>
+    <h2>Nossos Pilares ✨</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Missão</h3>
+        <p>Promover o desenvolvimento social e criativo dos jovens, transformando ideias em ações que geram impacto real.</p>
+      </div>
+      <div class="card">
+        <h3>Visão</h3>
+        <p>Ser referência em inovação e protagonismo juvenil, inspirando novas lideranças para um futuro melhor.</p>
+      </div>
+      <div class="card">
+        <h3>Valores</h3>
+        <p>Empatia, imaginação, responsabilidade social e colaboração são a base das nossas ações.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="contato.html" class="btn">Entre em contato</a>
+    </div>
+  </section>
+
+
+
+</body>
+<section>
+  <h2>Acesse o site oficial 🌐</h2>
+  <p style="text-align:center;max-width:800px;margin:0 auto 24px;">
+    Explore o site completo da Secretaria de Juventude e Impacto Social (SJIS) e conheça nossos projetos, equipes e iniciativas.
+  
+  <div style="text-align:center;margin-top:24px;">
+    <a href="https://sjis.duckdns.org" target="_blank" rel="noopener noreferrer" class="btn">
+      Abrir SJIS 
+    </a>
+  </div>
+</section>
+  <footer>
+    © 2025 SJIS – Secretaria de Juventude e Impacto Social · Instituto Imaginário
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const navMenu = document.getElementById('navMenu');
+    const navOverlay = document.getElementById('navOverlay');
+    const links = document.querySelectorAll('.nav-link');
+
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.add('active');
+      navOverlay.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    });
+    closeBtn.addEventListener('click', closeMenu);
+    navOverlay.addEventListener('click', closeMenu);
+    links.forEach(link => link.addEventListener('click', closeMenu));
+
+    function closeMenu() {
+      navMenu.classList.remove('active');
+      navOverlay.classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+  </script>

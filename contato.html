@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Contato — Instituto Imaginário</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --roxo: #5B2E8A;
+      --dourado: #d4af37;
+    }
+
+    /* MENU */
+    #navMenu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 420px;
+      height: 100vh;
+      background: rgba(91,46,138,0.98);
+      display:flex;
+      flex-direction:column;
+      padding-top: 64px;
+      align-items:center;
+      gap:18px;
+      transition: right .32s ease;
+      z-index: 9999;
+    }
+    #navMenu.active { right: 0; }
+    .menu-icon { cursor:pointer; font-size:1.9rem; color:var(--roxo); background:none; border:none; }
+    .close-btn { position:absolute; top:18px; right:18px; font-size:1.8rem; background:none; border:none; color:#fff; cursor:pointer; }
+    #navOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    #navOverlay.visible { opacity: 1; pointer-events: auto; }
+
+    /* Bolinhas de carregamento */
+    .dots-loading {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .dots-loading span {
+      width: 8px;
+      height: 8px;
+      background-color: var(--dourado);
+      border-radius: 50%;
+      animation: bounce 1s infinite;
+    }
+
+    .dots-loading span:nth-child(2) { animation-delay: 0.2s; }
+    .dots-loading span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.6; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    #resposta {
+      margin-top:12px;
+      font-weight:700;
+    }
+  </style>
+</head>
+<body>
+  <header style="position:fixed;top:0;left:0;right:0;z-index:11000;background:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <img src="https://files.catbox.moe/l556xu.png" alt="Instituto Imaginário" style="height:48px;">
+    </a>
+
+    <button class="menu-icon" id="menuBtn" aria-label="Abrir menu">☰</button>
+
+    <nav id="navMenu" aria-hidden="true" role="navigation">
+  <button class="close-btn" id="closeBtn" aria-label="Fechar menu">✖</button>
+  <a href="index.html" class="nav-link">Início</a>
+  <a href="sobre.html" class="nav-link">Sobre</a>
+  <a href="projetos.html" class="nav-link">Projetos</a>
+  <a href="casos.html" class="nav-link">Casos</a>
+  <a href="sjis.html" class="nav-link">SJIS</a>
+  <a href="contato.html" class="nav-link">Contato</a>
+</nav>
+  </header>
+
+  <div id="navOverlay" aria-hidden="true"></div>
+  <div style="height:76px;"></div>
+
+  <main>
+    <section class="contato" style="padding:40px 18px 120px;">
+      <div style="max-width:800px;margin:0 auto;text-align:left;">
+        <h1 style="margin:0 0 14px;color:#5B2E8A;">Fale Conosco ✨</h1>
+        <p style="color:#444;line-height:1.5;margin-bottom:24px;">
+          Envie sua mensagem sobre projetos, matrículas ou parcerias. Responderemos com imaginação!
+        </p>
+
+        <form id="discordForm" class="contato-form" style="display:flex;flex-direction:column;gap:12px;">
+          <input id="nome" name="nome" type="text" placeholder="Seu nome" required style="padding:12px;border-radius:10px;border:1px solid #e8e2f3">
+          <input id="email" name="email" type="email" placeholder="Seu e-mail" required style="padding:12px;border-radius:10px;border:1px solid #e8e2f3">
+          <textarea id="mensagem" name="mensagem" rows="5" placeholder="Sua mensagem" required style="padding:12px;border-radius:10px;border:1px solid #e8e2f3"></textarea>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button id="submitBtn" type="submit" style="background:linear-gradient(90deg,#FFD24A,#C5A23E);border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(197,162,62,0.25)">
+              Enviar Mensagem
+            </button>
+            <div id="resposta" aria-live="polite"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer style="padding:24px;background:#5B2E8A;color:#fff;text-align:center;">
+    © 2025 Instituto Imaginário — Todos os direitos reservados.
+  </footer>
+
+  <script>
+    (function(){
+      // MENU
+      const menuBtn = document.getElementById('menuBtn');
+      const closeBtn = document.getElementById('closeBtn');
+      const nav = document.getElementById('navMenu');
+      const overlay = document.getElementById('navOverlay');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      function openMenu(){ nav.classList.add('active'); overlay.classList.add('visible'); document.body.style.overflow='hidden'; }
+      function closeMenu(){ nav.classList.remove('active'); overlay.classList.remove('visible'); document.body.style.overflow=''; }
+
+      menuBtn.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      overlay.addEventListener('click', closeMenu);
+      navLinks.forEach(a=>a.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', e => { if(e.key==='Escape' && nav.classList.contains('active')) closeMenu(); });
+
+      // FORM DISCORD
+      const form = document.getElementById('discordForm');
+      const resposta = document.getElementById('resposta');
+      const submitBtn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+
+        // Mostra animação das bolinhas
+        resposta.innerHTML = `
+          <div class="dots-loading">
+            <span></span><span></span><span></span>
+          </div>
+          <span style="margin-left:8px;color:#5B2E8A;">Enviando...</span>
+        `;
+
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const mensagem = document.getElementById('mensagem').value.trim();
+
+        const webhookURL = "https://discord.com/api/v10/webhooks/1434319612689911829/hAZJ8GjvxqxKFYPEpotjiYsDlfkWqi3SlCTNzXBlNRAZu2shXlL3HOS9QycW2j-PBnq8";
+
+        const payload = {
+          embeds: [{
+            title: "📩 Nova mensagem — Site Instituto Imaginário",
+            color: 0x9b59b6,
+            fields: [
+              { name: "👤 Nome", value: nome, inline: true },
+              { name: "📧 E-mail", value: email, inline: true },
+              { name: "💬 Mensagem", value: mensagem }
+            ],
+            footer: { text: "Enviado via formulário do site" },
+            timestamp: new Date().toISOString()
+          }]
+        };
+
+        try {
+          submitBtn.disabled = true;
+          const res = await fetch(webhookURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (res.ok || res.status === 204) {
+            resposta.innerHTML = '✅ <b style="color:var(--dourado)">Mensagem enviada com sucesso!</b>';
+            form.reset();
+          } else {
+            resposta.innerHTML = '❌ Erro ao enviar. Código: ' + res.status;
+            resposta.style.color = 'orangered';
+          }
+        } catch (err) {
+          resposta.innerHTML = '⚠️ Erro de conexão.';
+          resposta.style.color = 'orangered';
+        } finally {
+          submitBtn.disabled = false;
+          setTimeout(()=>{ resposta.innerHTML = ''; }, 6000);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre — Instituto Imaginário</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --roxo: #5B2E8A;
+      --dourado: #d4af37;
+    }
+
+    /* MENU */
+    #navMenu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 420px;
+      height: 100vh;
+      background: rgba(91,46,138,0.98);
+      display:flex;
+      flex-direction:column;
+      padding-top: 64px;
+      align-items:center;
+      gap:18px;
+      transition: right .32s ease;
+      z-index: 9999;
+    }
+    #navMenu.active { right: 0; }
+    .menu-icon { cursor:pointer; font-size:1.9rem; color:var(--roxo); background:none; border:none; }
+    .close-btn { position:absolute; top:18px; right:18px; font-size:1.8rem; background:none; border:none; color:#fff; cursor:pointer; }
+    #navOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    #navOverlay.visible { opacity: 1; pointer-events: auto; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #faf7ff;
+      color: #333;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 11000;
+      background: #fff;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    main {
+      padding: 100px 20px 60px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      color: var(--roxo);
+    }
+
+    h2 {
+      color: var(--dourado);
+    }
+
+    footer {
+      background: var(--roxo);
+      color: white;
+      text-align: center;
+      padding: 24px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <img src="https://files.catbox.moe/l556xu.png" alt="Instituto Imaginário" style="height:48px;">
+    </a>
+
+    <button class="menu-icon" id="menuBtn" aria-label="Abrir menu">☰</button>
+
+    <nav id="navMenu" aria-hidden="true" role="navigation">
+      <button class="close-btn" id="closeBtn" aria-label="Fechar menu">✖</button>
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="sobre.html" class="nav-link">Sobre</a>
+      <a href="projetos.html" class="nav-link">Projetos</a>
+      <a href="casos.html" class="nav-link">Casos</a>
+      <a href="sjis.html" class="nav-link">SJIS</a>
+      <a href="contato.html" class="nav-link">Contato</a>
+    </nav>
+  </header>
+
+  <div id="navOverlay" aria-hidden="true"></div>
+  <div style="height:76px;"></div>
+
+  <main>
+    <h1>Sobre o Instituto Imaginário 💜</h1>
+    <p>O Instituto Imaginário é uma iniciativa dedicada a fomentar a criatividade, o protagonismo juvenil e a transformação social através da educação e da inovação.</p>
+
+    <h2>Missão</h2>
+    <p>Promover o desenvolvimento criativo e emocional de jovens, despertando talentos e fortalecendo o impacto social.</p>
+
+    <h2>Visão</h2>
+    <p>Ser uma referência em educação criativa e inovação social no Brasil.</p>
+
+    <h2>Valores</h2>
+    <ul>
+      <li>Imaginação e inovação</li>
+      <li>Juventude como potência</li>
+      <li>Colaboração e empatia</li>
+    </ul>
+  </main>
+
+  <footer>
+    © 2025 Instituto Imaginário — Todos os direitos reservados.
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const nav = document.getElementById('navMenu');
+    const overlay = document.getElementById('navOverlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function openMenu() {
+      nav.classList.add('active');
+      overlay.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      nav.classList.remove('active');
+      overlay.classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    navLinks.forEach(link => link.addEventListener('click', closeMenu));
+  </script>
+</body>
+</html>

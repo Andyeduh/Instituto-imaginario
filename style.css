@@ -1,0 +1,361 @@
+:root {
+  --roxo: #5B2E8A;
+  --amarelo: #FFD24A;
+  --dourado: #C5A23E;
+  --gradiente-dourado: linear-gradient(135deg, #FFD24A, #C5A23E, #E8C15E);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fff;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Corrige o espaço do menu fixo */
+main, section {
+  margin-top: 100px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: aparecer 0.8s ease forwards;
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- HEADER ---------- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo img {
+  height: 55px;
+}
+
+.menu-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--roxo);
+  display: block;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100vh;
+  background: var(--roxo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  transition: 0.5s;
+}
+
+nav.active {
+  right: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: var(--amarelo);
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* ---------- BANNER ---------- */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(91,46,138,0.6);
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
+  color: white;
+  z-index: 10;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+}
+
+.slide-text h1 {
+  font-size: 2.6rem;
+  background: var(--gradiente-dourado);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.slide-text p {
+  font-size: 1.2rem;
+  max-width: 480px;
+}
+
+/* ---------- CONTROLES ---------- */
+.banner-controls {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.banner-controls .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.banner-controls .dot.active {
+  background: var(--dourado);
+  transform: scale(1.2);
+}
+
+/* ---------- CANVA SLIDE ---------- */
+.canva-slide {
+  position: relative;
+  text-align: center;
+  padding: 80px 20px;
+  background: #fdf9ff;
+  overflow: hidden;
+}
+
+.canva-slide h2 {
+  font-weight: 700;
+  margin-bottom: 25px;
+  background: var(--gradiente-dourado);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+}
+
+.canva-slide .creditos {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #5B2E8A;
+}
+
+.canva-slide .creditos a {
+  color: #5B2E8A;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.canva-slide .creditos a:hover {
+  color: #C5A23E;
+}
+
+/* ---------- FORMAS GEOMÉTRICAS ---------- */
+.geometric-bg span {
+  position: absolute;
+  opacity: 0.15;
+  animation: float 10s infinite ease-in-out;
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--roxo);
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 70px solid transparent;
+  border-right: 70px solid transparent;
+  border-bottom: 120px solid var(--amarelo);
+  top: 50%;
+  right: 15%;
+  animation-delay: 3s;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background: var(--dourado);
+  bottom: 10%;
+  left: 30%;
+  animation-delay: 5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--roxo);
+  color: white;
+  font-size: 0.9rem;
+}
+/* ---------- CONTATO ---------- */
+.contato {
+  position: relative;
+  background: #fdf9ff;
+  padding: 120px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.contato-container {
+  max-width: 1100px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(91,46,138,0.15);
+  padding: 40px;
+}
+
+.contato-info h2 {
+  font-size: 2.2rem;
+  background: var(--gradiente-dourado);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contato-info p {
+  margin: 15px 0 30px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.contato-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contato-form input,
+.contato-form textarea {
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid #e6e0f0;
+  outline: none;
+  font-size: 1rem;
+  transition: 0.3s;
+  background: rgba(255,255,255,0.8);
+}
+
+.contato-form input:focus,
+.contato-form textarea:focus {
+  border-color: var(--roxo);
+  box-shadow: 0 0 8px rgba(91,46,138,0.3);
+}
+
+.contato-form button {
+  background: var(--gradiente-dourado);
+  border: none;
+  color: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(197,162,62,0.3);
+}
+
+.contato-form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(197,162,62,0.45);
+}
+
+.contato-mapa {
+  width: 100%;
+  height: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+@media (max-width: 850px) {
+  .contato-container {
+    grid-template-columns: 1fr;
+  }
+
+  .contato-mapa {
+    height: 300px;
+  }
+}
